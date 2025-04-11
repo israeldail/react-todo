@@ -30,7 +30,12 @@ export default function Home() {
         {todo.length === 0 ? (
           <li>nothing to see</li>
         ) : (
-          todo.map((item, idx) => <li key={idx}>{item}</li>)
+          todo.map((item, idx) => (
+            <>
+              <li key={idx}>{item}</li>
+              <button onClick={deleteTodo}>Delete</button>
+            </>
+          ))
         )}
       </ul>
     </div>
