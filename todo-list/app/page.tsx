@@ -4,7 +4,7 @@ import { useState } from "react";
 export default function Home() {
   const [todo, setTodo] = useState<string[]>([]);
   const [input, setInput] = useState<string>("");
-  const [editingIndex, setEditingIndex] = useState(null);
+  const [editingIndex, setEditingIndex] = useState<any>(null);
   const [editValue, setEditValue] = useState("");
 
   const deleteTodo = (item: string) => {
