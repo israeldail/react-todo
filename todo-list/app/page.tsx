@@ -5,6 +5,10 @@ export default function Home() {
   const [todo, setTodo] = useState<string[]>([]);
   const [input, setInput] = useState<string>("");
 
+  const deleteTodo = (todo: string) => {
+    return 0;
+  }
+
   return (
     <div className="flex flex-col items-center">
       <p className="text-7xl">Todo list</p>
