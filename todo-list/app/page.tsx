@@ -15,6 +15,8 @@ export default function Home() {
       >Add todo</button>
 
       {/* list for todos to be output */}
+      {/* TODO: Add button to delete todos */}
+      {/* TODO: Add button to edit todos */}
       <ul>
         {todo.length === 0 ? (
           <li>nothing to see</li>
