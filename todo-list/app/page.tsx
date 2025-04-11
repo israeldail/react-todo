@@ -5,8 +5,13 @@ export default function Home() {
   const [todo, setTodo] = useState<string[]>([]);
   const [input, setInput] = useState<string>("");
 
-  const deleteTodo = (todo: string) => {
-    return 0;
+  const deleteTodo = (item: string) => {
+    if (todo.indexOf(item) !== -1) {
+      let index = todo.indexOf(item)
+      todo.splice(index, 1)
+    }
+
+    return "item not found";
   }
 
   return (
