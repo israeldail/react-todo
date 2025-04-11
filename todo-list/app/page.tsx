@@ -4,6 +4,8 @@ import { useState } from "react";
 export default function Home() {
   const [todo, setTodo] = useState<string[]>([]);
   const [input, setInput] = useState<string>("");
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [editValue, setEditValue] = useState("");
 
   const deleteTodo = (item: string) => {
     if (todo.includes(item)) {
@@ -36,11 +38,53 @@ export default function Home() {
           <li>nothing to see</li>
         ) : (
           todo.map((item, idx) => (
-            <div className="flex">
-              <li key={idx}>{item}</li>
-              <button className="ml-7 cursor-pointer" onClick={() => deleteTodo(item)}>Delete</button>
-              <button className="ml-7 cursor-pointer" onClick={() => editTodo(item, input)}>Edit</button>
-            </div>
+            <li key={idx}>
+              <div className="flex items-center">
+                {/* Show item text OR input if this item is being edited */}
+                {editingIndex === idx ? (
+                  <input
+                    className="mt-2 p-2"
+                    value={editValue}
+                    onChange={(e) => setEditValue(e.target.value)}
+                    placeholder="Edit todo"
+                  />
+                ) : (
+                  <span>{item}</span>
+                )}
+
+                {/* Edit button */}
+                {editingIndex === idx ? (
+                  <button
+                    className="ml-4 cursor-pointer"
+                    onClick={() => {
+                      editTodo(item, editValue);
+                      setEditingIndex(null); // Done editing
+                      setEditValue(""); // Clear input
+                    }}
+                  >
+                    Save
+                  </button>
+                ) : (
+                  <button
+                    className="ml-4 cursor-pointer"
+                    onClick={() => {
+                      setEditingIndex(idx);
+                      setEditValue(item); // Pre-fill input with current value
+                    }}
+                  >
+                    Edit
+                  </button>
+                )}
+
+                {/* Delete button */}
+                <button
+                  className="ml-4 cursor-pointer"
+                  onClick={() => deleteTodo(item)}
+                >
+                  Delete
+                </button>
+              </div>
+            </li>
           ))
         )}
       </ul>
