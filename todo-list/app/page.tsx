@@ -6,13 +6,18 @@ export default function Home() {
   const [input, setInput] = useState<string>("");
 
   const deleteTodo = (item: string) => {
-    if (todo.indexOf(item) !== -1) {
-      let index = todo.indexOf(item)
-      todo.splice(index, 1)
+    if (todo.includes(item)) {
+      const updatedTodos = todo.filter((t) => t !== item);
+      setTodo(updatedTodos);
+    } else {
+      console.log("Item not found");
     }
+  };
 
-    return "item not found";
-  }
+  const editTodo = (item: string, newVal: string) => {
+    const updatedTodos = todo.map((t) => (t === item ? newVal : t));
+    setTodo(updatedTodos);
+  };
 
   return (
     <div className="flex flex-col items-center">
@@ -31,10 +36,11 @@ export default function Home() {
           <li>nothing to see</li>
         ) : (
           todo.map((item, idx) => (
-            <>
+            <div className="flex">
               <li key={idx}>{item}</li>
-              <button onClick={deleteTodo}>Delete</button>
-            </>
+              <button className="ml-7 cursor-pointer" onClick={() => deleteTodo(item)}>Delete</button>
+              <button className="ml-7 cursor-pointer" onClick={() => editTodo(item, input)}>Edit</button>
+            </div>
           ))
         )}
       </ul>
