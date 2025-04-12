@@ -27,7 +27,7 @@ export default function Home() {
       <input className="mt-7 p-2" value={input} onChange={(e) => setInput(e.target.value)} placeholder="add todo" />
       <button
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        onClick={() => { setTodo([...todo, input]); setInput(""); }}
+        onClick={() => { input.length !== 0 ? setTodo([...todo, input]) : alert('Please enter a value'); setInput(""); }}
       >Add todo</button>
 
       {/* list for todos to be output */}
